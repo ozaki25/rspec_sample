@@ -1,3 +1,4 @@
+require 'fileutils'
 require_relative '../../bin/ruby/toge'
 
 RSpec.describe Toge do
@@ -11,28 +12,15 @@ RSpec.describe Toge do
   end
 
   before do
-    backup_yaml
+    FileUtils.cp(SETTINGS_YAML, TMP_YAML)
+
     settings = File.open(SETTINGS_YAML, 'w')
     YAML::dump(data, settings)
     settings.close
   end
 
   after do
-    restore_yaml
-  end
-
-  def backup_yaml
-    tmp = File.open(TMP_YAML, 'w')
-    current_settings = YAML::load_file(SETTINGS_YAML)
-    YAML::dump(current_settings, tmp)
-    tmp.close
-  end
-
-  def restore_yaml
-    settings = File.open(SETTINGS_YAML, 'w')
-    tmp = YAML::load_file(TMP_YAML)
-    YAML::dump(tmp, settings)
-    settings.close
+    FileUtils.mv(TMP_YAML, SETTINGS_YAML)
   end
 
   describe '#first_date_string' do
