@@ -14,12 +14,18 @@ class Toge
 
     def first_date_string
       settings = load_settings_yaml
+      raise StandardError if !settings || !settings[:date] || !settings[:date][:first_date]
       settings[:date][:first_date]
+    rescue
+      exit_for_error
     end
 
     def last_date_string
       settings = load_settings_yaml
+      raise StandardError if !settings || !settings[:date] || !settings[:date][:last_date]
       settings[:date][:last_date]
+    rescue
+      exit_for_error
     end
 
     def first_date

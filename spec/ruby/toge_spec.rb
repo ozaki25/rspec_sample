@@ -29,16 +29,16 @@ RSpec.describe Toge do
         let(:data) do
           { 'date': { 'last_date': last_date } }
         end
-        it 'first_dateがnilであること' do
-          expect(Toge.first_date_string).to eq nil
+        it '異常終了すること' do
+          expect { Toge.first_date_string }.to raise_error(SystemExit)
         end
       end
       context 'first_dateが設定されていない場合' do
         let(:data) do
           { 'test': 'test' }
         end
-        it 'exceptionが発生すること' do
-          expect { Toge.first_date_string }.to raise_error(NoMethodError)
+        it '異常終了すること' do
+          expect { Toge.first_date_string }.to raise_error(SystemExit)
         end
       end
     end
@@ -57,16 +57,16 @@ RSpec.describe Toge do
         let(:data) do
           { 'date': { 'first_date': first_date } }
         end
-        it 'last_dateがnilであること' do
-          expect(Toge.last_date_string).to eq nil
+        it '異常終了すること' do
+          expect { Toge.last_date_string }.to raise_error(SystemExit)
         end
       end
       context 'last_dateが設定されていない場合' do
         let(:data) do
           { 'test': 'test' }
         end
-        it 'exceptionが発生すること' do
-          expect { Toge.last_date_string }.to raise_error(NoMethodError)
+        it '異常終了すること' do
+          expect { Toge.last_date_string }.to raise_error(SystemExit)
         end
       end
     end
